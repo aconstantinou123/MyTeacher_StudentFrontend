@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import WelcomePage from '../containers/WelcomePage/WelcomePage'
-import StudentLogin from '../containers/StudentLogin/StudentLogin';
+import StudentLogin from '../containers/StudentLogin/StudentLogin'
 
 const MainRoutes = () => (
   <div>
