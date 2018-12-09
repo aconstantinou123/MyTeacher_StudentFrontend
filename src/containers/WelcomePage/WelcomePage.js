@@ -11,7 +11,7 @@ const WelcomePage = ({ student }) => (
     <p>Welcome to myTeacher - Student Portal. Please login to continue or proceed your account</p>
     {
           student
-          && <Link to="/teacher">Go to Teacher Page</Link>
+          && <Link to="/studentt">Go to Student Page</Link>
         }
     {
           !student

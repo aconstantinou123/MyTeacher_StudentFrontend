@@ -46,7 +46,6 @@ export const persistLogin = () => async (dispatch) => {
     axios.defaults.headers.common.Authorization = response.headers.authorization
     const token = response.headers.authorization.split(' ')[1]
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      console.log(decoded)
       dispatch(getStudent(decoded.sub))
     })
     dispatch(persistLoginFulfilled(response.data))

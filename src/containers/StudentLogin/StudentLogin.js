@@ -18,12 +18,12 @@ class studentLogin extends Component {
     this.showPassword = this.showPassword.bind(this)
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   const { teacher, history } = this.props
-  //   if (teacher !== nextProps.teacher) {
-  //     history.push('/teacher')
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    const { student, history } = this.props
+    if (student !== nextProps.student) {
+      history.push('/student')
+    }
+  }
 
   handleUsernameChange(event) {
     const { target } = event
@@ -88,13 +88,13 @@ class studentLogin extends Component {
 }
 
 studentLogin.defaultProps = {
-  // student: null,
+  student: null,
 }
 
 studentLogin.propTypes = {
   loginStudent: PropTypes.func.isRequired,
-  // student: PropTypes.object,
-  // history: PropTypes.object.isRequired,
+  student: PropTypes.object,
+  history: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {
