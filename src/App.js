@@ -5,6 +5,7 @@ import createHistory from 'history/createBrowserHistory'
 import axios from 'axios'
 import MainRoutes from './routes/MainRoutes'
 import store from './store/store'
+import { persistLogin } from './actions/authenticationActions'
 
 axios.defaults.withCredentials = true
 
@@ -18,6 +19,8 @@ history.listen((location) => {
   if (pathChanged || hashChanged) window.scrollTo(0, 0)
   prevLocation = location
 })
+
+store.dispatch(persistLogin())
 
 const App = () => (
   <Provider store={store}>
