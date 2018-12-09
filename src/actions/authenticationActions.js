@@ -54,4 +54,3 @@ export const persistLogin = () => async (dispatch) => {
     dispatch(persistLoginRejected(err))
   }
 }
-
