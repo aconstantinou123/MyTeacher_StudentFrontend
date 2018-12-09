@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import ProtectedRoute from './ProtectedRoute' 
+import ProtectedRoute from './ProtectedRoute'
 
 import WelcomePage from '../containers/WelcomePage/WelcomePage'
 import StudentLogin from '../containers/StudentLogin/StudentLogin'

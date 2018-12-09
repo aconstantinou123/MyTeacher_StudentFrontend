@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const StudentLandingPage = ({ student }) => {
-  return (
-    <div>
-      {
+const StudentLandingPage = ({ student }) => (
+  <div>
+    {
       student
       && (
       <div>
@@ -26,9 +25,8 @@ Welcome
       )
 
     }
-    </div>
-  )
-}
+  </div>
+)
 
 StudentLandingPage.defaultProps = {
   student: null,
