@@ -4,19 +4,35 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as studentRecordActionCreators from '../../actions/studentRecordActions'
+import * as scheduleActionCreators from '../../actions/scheduleActions'
 
 class StudentLandingPage extends Component {
   componentWillMount() {
-    const { student, getStudentRecord } = this.props
+    const { 
+      student, 
+      getStudentRecord,
+      studentRecord,
+      getStudentSchedule } = this.props
     if (student) {
       getStudentRecord(student.username)
+    }
+    if(studentRecord){
+      getStudentSchedule(student.studentLevel)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { student, getStudentRecord } = this.props
+    const { 
+      student, 
+      getStudentRecord, 
+      studentRecord, 
+      getStudentSchedule,
+     } = this.props
     if (student !== nextProps.student && nextProps.student.username) {
       getStudentRecord(nextProps.student.username)
+    }
+    else if(studentRecord !== nextProps.studentRecord && nextProps.studentRecord.studentLevel){
+      getStudentSchedule(nextProps.studentRecord.studentLevel)
     }
   }
 
@@ -51,16 +67,20 @@ class StudentLandingPage extends Component {
 
 StudentLandingPage.defaultProps = {
   student: null,
+  studentRecord: null,
 }
 
 StudentLandingPage.propTypes = {
   getStudentRecord: PropTypes.func.isRequired,
   student: PropTypes.object,
+  getStudentSchedule: PropTypes.func.isRequired,
+  studentRecord: PropTypes.object,
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ...studentRecordActionCreators,
+    ...scheduleActionCreators,
   }, dispatch)
 }
 
@@ -68,7 +88,9 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     ...state.student,
+    ...state.studentRecord,
     ...state.studentAuthentication,
+    ...state.studentSchedule,
   }
 }
 
