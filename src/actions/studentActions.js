@@ -18,7 +18,6 @@ export const getStudent = username => async (dispatch) => {
   dispatch(getStudentPending())
   try {
     const response = await axios.get(`${process.env.STUDENT_URL}/${username}`)
-    axios.defaults.headers.common.Authorization = response.headers.authorization
     dispatch(getStudentFulfilled(response.data))
   } catch (err) {
     dispatch(getStudentRejected(err))
