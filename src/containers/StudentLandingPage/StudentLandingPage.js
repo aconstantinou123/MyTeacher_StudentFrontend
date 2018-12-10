@@ -6,26 +6,25 @@ import { bindActionCreators } from 'redux'
 import * as studentRecordActionCreators from '../../actions/studentRecordActions'
 
 class StudentLandingPage extends Component {
-  
-  componentWillMount(){
+  componentWillMount() {
     const { student, getStudentRecord } = this.props
-    if(student){
+    if (student) {
       getStudentRecord(student.username)
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const { student, getStudentRecord } = this.props
-    if(student !== nextProps.student && nextProps.student.username){
+    if (student !== nextProps.student && nextProps.student.username) {
       getStudentRecord(nextProps.student.username)
     }
   }
-  
-  render(){
-      const { student } = this.props
-      return (
-        <div>
-          {
+
+  render() {
+    const { student } = this.props
+    return (
+      <div>
+        {
             student
             && (
             <div>
@@ -43,12 +42,12 @@ class StudentLandingPage extends Component {
               </div>
             </div>
             )
-      
+
           }
-        </div>
-      )
-    }
+      </div>
+    )
   }
+}
 
 StudentLandingPage.defaultProps = {
   student: null,
