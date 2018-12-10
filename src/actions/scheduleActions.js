@@ -19,7 +19,7 @@ export const getStudentSchedule = classLevel => async (dispatch) => {
   dispatch(getStudentSchedulePending())
   try {
     const response = await axios.get(`${process.env.SCHEDULE_URL}/slots/${classLevel}`)
-    const duplicateClassedRemoved = _.uniqBy(response.data, (slot) => slot.classId)
+    const duplicateClassedRemoved = _.uniqBy(response.data, slot => slot.classId)
     dispatch(getStudentScheduleFulfilled(duplicateClassedRemoved))
   } catch (err) {
     dispatch(getStudentScheduleRejected(err))

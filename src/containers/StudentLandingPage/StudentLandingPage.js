@@ -8,30 +8,30 @@ import * as scheduleActionCreators from '../../actions/scheduleActions'
 
 class StudentLandingPage extends Component {
   componentWillMount() {
-    const { 
-      student, 
+    const {
+      student,
       getStudentRecord,
       studentRecord,
-      getStudentSchedule } = this.props
+      getStudentSchedule,
+    } = this.props
     if (student) {
       getStudentRecord(student.username)
     }
-    if(studentRecord){
+    if (studentRecord) {
       getStudentSchedule(student.studentLevel)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { 
-      student, 
-      getStudentRecord, 
-      studentRecord, 
+    const {
+      student,
+      getStudentRecord,
+      studentRecord,
       getStudentSchedule,
-     } = this.props
+    } = this.props
     if (student !== nextProps.student && nextProps.student.username) {
       getStudentRecord(nextProps.student.username)
-    }
-    else if(studentRecord !== nextProps.studentRecord && nextProps.studentRecord.studentLevel){
+    } else if (studentRecord !== nextProps.studentRecord && nextProps.studentRecord.studentLevel) {
       getStudentSchedule(nextProps.studentRecord.studentLevel)
     }
   }
