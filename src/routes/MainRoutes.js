@@ -5,7 +5,7 @@ import ProtectedRoute from './ProtectedRoute'
 import WelcomePage from '../containers/WelcomePage/WelcomePage'
 import StudentLogin from '../containers/StudentLogin/StudentLogin'
 import StudentLandingPage from '../containers/StudentLandingPage/StudentLandingPage'
-import ClassPicker from '../containers/ClassPicker/ClassPicker';
+import ClassPicker from '../containers/ClassPicker/ClassPicker'
 
 const MainRoutes = () => (
   <div>

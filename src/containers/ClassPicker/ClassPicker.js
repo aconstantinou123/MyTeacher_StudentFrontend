@@ -6,12 +6,12 @@ import _ from 'lodash'
 import moment from 'moment'
 import * as studentRecordActionCreators from '../../actions/studentRecordActions'
 import * as scheduleActionCreators from '../../actions/scheduleActions'
-import ClassCard from '../../components/ClassCard/ClassCard';
+import ClassCard from '../../components/ClassCard/ClassCard'
 
 import './ClassPicker.scss'
 
 class ClassPicker extends Component {
-  constructor(){
+  constructor() {
     super()
     this.mapClasses = this.mapClasses.bind(this)
   }
@@ -30,39 +30,39 @@ class ClassPicker extends Component {
     }
   }
 
-  mapClasses(){
+  mapClasses() {
     const { availableClasses } = this.props
     const classesSortedByDate = _.sortBy(availableClasses,
-       (availableClass) => 
-    { 
-      return [moment(availableClass.date, 'DD-MM-YYYY'), -availableClass.startTime]
-    }).reverse()
+      availableClass => [moment(availableClass.date, 'DD-MM-YYYY'), -availableClass.startTime]).reverse()
     return classesSortedByDate
-      .map(availableClass => {
-        return <ClassCard 
-        key={availableClass.classId} 
-        availableClass={availableClass} />
-    })  
+      .map(availableClass => (
+        <ClassCard
+          key={availableClass.classId}
+          availableClass={availableClass}
+        />
+      ))
   }
 
-  render(){
+  render() {
     const { availableClasses } = this.props
     return (
       <div>
         <h2>Please choose a class or classes to sign up for</h2>
         {
-          availableClasses.length >= 1 &&
+          availableClasses.length >= 1
+          && (
           <div className="cardwrapper">
             {this.mapClasses()}
           </div>
+          )
 
         }
         {
-          !availableClasses.length &&
-          <div>Loading...</div>
+          !availableClasses.length
+          && <div>Loading...</div>
         }
       </div>
-      
+
     )
   }
 }
