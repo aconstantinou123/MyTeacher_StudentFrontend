@@ -26,19 +26,25 @@ class ClassPicker extends Component {
     if (student !== nextProps.student && nextProps.student.username) {
       getStudentRecord(nextProps.student.username)
     } else if (studentRecord !== nextProps.studentRecord && nextProps.studentRecord.studentLevel) {
-      getAvailableClasses(nextProps.studentRecord.studentLevel)
+      getAvailableClasses(nextProps.studentRecord.studentLevel, nextProps.student.username)
     }
   }
 
   mapClasses() {
-    const { availableClasses } = this.props
+    const { 
+      availableClasses, 
+      selectClassToBook,
+      history,
+    } = this.props
     const classesSortedByDate = _.sortBy(availableClasses,
       availableClass => [moment(availableClass.date, 'DD-MM-YYYY'), -availableClass.startTime]).reverse()
     return classesSortedByDate
       .map(availableClass => (
         <ClassCard
           key={availableClass.classId}
+          selectClassToBook={selectClassToBook}
           availableClass={availableClass}
+          history={history}
         />
       ))
   }
@@ -75,10 +81,12 @@ ClassPicker.defaultProps = {
 
 ClassPicker.propTypes = {
   availableClasses: PropTypes.arrayOf(PropTypes.object),
+  selectClassToBook: PropTypes.func.isRequired,
   getStudentRecord: PropTypes.func.isRequired,
   student: PropTypes.object,
   getAvailableClasses: PropTypes.func.isRequired,
   studentRecord: PropTypes.object,
+  history: PropTypes.object.isRequired,
 }
 
 function mapDispatchToProps(dispatch) {

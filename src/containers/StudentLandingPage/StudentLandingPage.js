@@ -32,7 +32,7 @@ class StudentLandingPage extends Component {
     if (student !== nextProps.student && nextProps.student.username) {
       getStudentRecord(nextProps.student.username)
     } else if (studentRecord !== nextProps.studentRecord && nextProps.studentRecord.studentLevel) {
-      getAvailableClasses(nextProps.studentRecord.studentLevel)
+      getAvailableClasses(nextProps.studentRecord.studentLevel, nextProps.student.username)
     }
   }
 
