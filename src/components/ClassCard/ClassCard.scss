@@ -1,0 +1,32 @@
+@import '../../colors.scss';
+
+.card-container {
+  width: 400px;
+  border: 1px solid black;
+  text-align: center;
+  margin: 20px;
+}
+
+.one {
+  background-color: $cornflower-blue;
+
+   &:hover{
+    background-color: $cornflower-blue-hover;
+  }
+}
+
+.group {
+  background-color: $tomato;
+
+  &:hover {
+    background-color: $tomato-hover;
+  }
+}
+
+.open {
+  background-color: $dark-yellow;
+
+  &:hover {
+    background-color: $dark-yellow-hover;
+  }
+}

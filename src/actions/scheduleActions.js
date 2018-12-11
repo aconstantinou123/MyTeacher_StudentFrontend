@@ -2,26 +2,26 @@ import axios from 'axios'
 import _ from 'lodash'
 
 import {
-  GET_STUDENT_SCHEDULE,
+  GET_AVAILABLE_CLASSES,
 } from '../types/types'
 
-export const getStudentSchedulePending = () => ({ type: `${GET_STUDENT_SCHEDULE}_PENDING` })
-export const getStudentScheduleFulfilled = payload => ({
-  type: `${GET_STUDENT_SCHEDULE}_FULFILLED`,
+export const getAvailableClassesPending = () => ({ type: `${GET_AVAILABLE_CLASSES}_PENDING` })
+export const getAvailableClassesFulfilled = payload => ({
+  type: `${GET_AVAILABLE_CLASSES}_FULFILLED`,
   payload,
 })
-export const getStudentScheduleRejected = err => ({
-  type: `${GET_STUDENT_SCHEDULE}_REJECTED`,
+export const getAvailableClassesRejected = err => ({
+  type: `${GET_AVAILABLE_CLASSES}_REJECTED`,
   payload: err.message,
 })
 
-export const getStudentSchedule = classLevel => async (dispatch) => {
-  dispatch(getStudentSchedulePending())
+export const getAvailableClasses = classLevel => async (dispatch) => {
+  dispatch(getAvailableClassesPending())
   try {
     const response = await axios.get(`${process.env.SCHEDULE_URL}/slots/${classLevel}`)
-    const duplicateClassedRemoved = _.uniqBy(response.data, slot => slot.classId)
-    dispatch(getStudentScheduleFulfilled(duplicateClassedRemoved))
+    const duplicateClassedRemoved = _.uniqBy(response.data, (slot) => slot.classId)
+    dispatch(getAvailableClassesFulfilled(duplicateClassedRemoved))
   } catch (err) {
-    dispatch(getStudentScheduleRejected(err))
+    dispatch(getAvailableClassesRejected(err))
   }
 }
