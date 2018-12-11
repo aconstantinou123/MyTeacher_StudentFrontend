@@ -7,9 +7,9 @@ import {
   BOOK_CLASS,
 } from '../types/types'
 
-export const selectClassToBook = (availableClass) => ({
+export const selectClassToBook = availableClass => ({
   type: SELECT_CLASS_TO_BOOK,
-  payload: availableClass
+  payload: availableClass,
 })
 
 export const getAvailableClassesPending = () => ({ type: `${GET_AVAILABLE_CLASSES}_PENDING` })
@@ -18,7 +18,7 @@ export const getAvailableClassesFulfilled = (availableClasses, bookedClasses) =>
   payload: {
     availableClasses,
     bookedClasses,
-  }
+  },
 })
 export const getAvailableClassesRejected = err => ({
   type: `${GET_AVAILABLE_CLASSES}_REJECTED`,
@@ -31,8 +31,8 @@ export const getAvailableClasses = (classLevel, username) => async (dispatch) =>
     const response = await axios.get(`${process.env.SCHEDULE_URL}/slots/${classLevel}`)
     const duplicateClassedRemoved = _.uniqBy(response.data, slot => slot.classId)
     const bookedClasses = duplicateClassedRemoved
-    .filter(availableClass => availableClass.students
-      .some(studentUsername => studentUsername === username))
+      .filter(availableClass => availableClass.students
+        .some(studentUsername => studentUsername === username))
     const availableClasses = duplicateClassedRemoved
       .filter(availableClass => availableClass.students.indexOf(username) === -1)
     dispatch(getAvailableClassesFulfilled(availableClasses, bookedClasses))
@@ -47,9 +47,9 @@ export const bookClassFulfilled = (availableClasses, bookedClasses) => ({
   payload: {
     availableClasses,
     bookedClasses,
-  }
+  },
 })
-export const bookClassRejected = (err) => ({
+export const bookClassRejected = err => ({
   type: `${BOOK_CLASS}_REJECTED`,
   payload: err.message,
 })
@@ -60,17 +60,16 @@ export const bookClass = (username, classId) => async (dispatch) => {
     username,
     classId,
   }
-  try{
+  try {
     const response = await axios.put(`${process.env.SCHEDULE_URL}/book-slot`, body)
     const duplicateClassedRemoved = _.uniqBy(response.data, slot => slot.classId)
     const bookedClasses = duplicateClassedRemoved
-    .filter(availableClass => availableClass.students
-      .some(studentUsername => studentUsername === username))
+      .filter(availableClass => availableClass.students
+        .some(studentUsername => studentUsername === username))
     const availableClasses = duplicateClassedRemoved
       .filter(availableClass => availableClass.students.indexOf(username) === -1)
     dispatch(bookClassFulfilled(availableClasses, bookedClasses))
-  }
-  catch (err) {
+  } catch (err) {
     dispatch(bookClassRejected(err))
   }
 }

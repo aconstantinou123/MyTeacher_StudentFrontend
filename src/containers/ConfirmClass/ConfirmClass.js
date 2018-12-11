@@ -5,13 +5,15 @@ import PropTypes from 'prop-types'
 import { displayClassLevel, displayClassType } from '../../helperFunctions/displayFunctions'
 import * as scheduleActionCreators from '../../actions/scheduleActions'
 
-const ConfirmClass = ({ selectedClass, history, bookClass, student }) => {
-    const handleBookClicked = () => {
-      bookClass(student.username, selectedClass.classId)
-      history.push("/student")
-    } 
-    return (
-      <div>
+const ConfirmClass = ({
+  selectedClass, history, bookClass, student,
+}) => {
+  const handleBookClicked = () => {
+    bookClass(student.username, selectedClass.classId)
+    history.push('/student')
+  }
+  return (
+    <div>
       <h2>Confirm Selected Class</h2>
       <h2>
   Date:
@@ -44,7 +46,7 @@ const ConfirmClass = ({ selectedClass, history, bookClass, student }) => {
       <button type="button" onClick={handleBookClicked}>Book Class</button>
       <button type="button" onClick={() => history.goBack()}>Go Back</button>
     </div>
-    )
+  )
 }
 
 ConfirmClass.defaultProps = {

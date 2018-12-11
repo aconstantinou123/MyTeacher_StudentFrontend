@@ -10,17 +10,18 @@ const ClassCard = ({ availableClass, selectClassToBook, history }) => {
     history.push('/schedule/confirm')
   }
   const handleKeyDown = (e) => {
-    if(e.keyCode === 13 || 32){
+    if (e.keyCode === 13 || 32) {
       handleSelectClassClicked()
     }
   }
   return (
-    <div 
-    tabIndex="0"
-    role="button"
-    onKeyDown={handleKeyDown}
-    className={displayClassCSS(availableClass)} 
-    onClick={handleSelectClassClicked}>
+    <div
+      tabIndex="0"
+      role="button"
+      onKeyDown={handleKeyDown}
+      className={displayClassCSS(availableClass)}
+      onClick={handleSelectClassClicked}
+    >
       <h2>
   Date:
         {availableClass.date}

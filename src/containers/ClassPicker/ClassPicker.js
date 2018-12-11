@@ -31,8 +31,8 @@ class ClassPicker extends Component {
   }
 
   mapClasses() {
-    const { 
-      availableClasses, 
+    const {
+      availableClasses,
       selectClassToBook,
       history,
     } = this.props

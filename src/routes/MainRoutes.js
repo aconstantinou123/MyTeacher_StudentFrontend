@@ -1,14 +1,14 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import ProtectedRoute from './ProtectedRoute'
 import PropTypes from 'prop-types'
+import ProtectedRoute from './ProtectedRoute'
 
 import WelcomePage from '../containers/WelcomePage/WelcomePage'
 import StudentLogin from '../containers/StudentLogin/StudentLogin'
 import StudentLandingPage from '../containers/StudentLandingPage/StudentLandingPage'
 import ClassPicker from '../containers/ClassPicker/ClassPicker'
-import ConfirmClass from '../containers/ConfirmClass/ConfirmClass';
-import PrivateRoute from './PrivateRoute';
+import ConfirmClass from '../containers/ConfirmClass/ConfirmClass'
+import PrivateRoute from './PrivateRoute'
 
 const MainRoutes = ({ history }) => (
   <div>
