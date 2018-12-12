@@ -8,7 +8,7 @@ import * as studentRecordActionCreators from '../../actions/studentRecordActions
 import * as scheduleActionCreators from '../../actions/scheduleActions'
 
 import './BookedClasses.scss'
-import BookedClass from '../../components/BookedClass/BookedClass';
+import BookedClass from '../../components/BookedClass/BookedClass'
 
 class BookedClasses extends Component {
   constructor() {
@@ -38,9 +38,10 @@ class BookedClasses extends Component {
       bookedClass => [moment(bookedClass.date, 'DD-MM-YYYY'), -bookedClass.startTime]).reverse()
     return classesSortedByDate
       .map(bookedClass => (
-        <BookedClass 
+        <BookedClass
           key={bookedClass.classId}
-          bookedClass={bookedClass}/>
+          bookedClass={bookedClass}
+        />
       ))
   }
 

@@ -4,43 +4,40 @@ import { displayClassLevel, displayClassType, displayClassCSS } from '../../help
 
 import './BookedClass.scss'
 
-const BookedClass = ({ bookedClass }) => {
- 
-  return (
-    <div
-      className={displayClassCSS(bookedClass)}     
-    >
-      <h2>
+const BookedClass = ({ bookedClass }) => (
+  <div
+    className={displayClassCSS(bookedClass)}
+  >
+    <h2>
   Date:
-        {bookedClass.date}
-      </h2>
-      <h3>
+      {bookedClass.date}
+    </h2>
+    <h3>
   Start time:
-        {bookedClass.startTime}
-      </h3>
-      <h3>
+      {bookedClass.startTime}
+    </h3>
+    <h3>
   End time:
-        {bookedClass.endTime}
-      </h3>
-      <h3>
+      {bookedClass.endTime}
+    </h3>
+    <h3>
   Class type:
-        {displayClassType(bookedClass)}
-      </h3>
-      <h3>
+      {displayClassType(bookedClass)}
+    </h3>
+    <h3>
   Class level:
-        {displayClassLevel(bookedClass)}
-      </h3>
-      <h3>
+      {displayClassLevel(bookedClass)}
+    </h3>
+    <h3>
   Class capacity:
-        {bookedClass.capacity}
-      </h3>
-      <h4>
+      {bookedClass.capacity}
+    </h3>
+    <h4>
   Class description:
-        {bookedClass.classDescription}
-      </h4>
-    </div>
-  )
-}
+      {bookedClass.classDescription}
+    </h4>
+  </div>
+)
 BookedClass.propTypes = {
   bookedClass: PropTypes.object.isRequired,
 }

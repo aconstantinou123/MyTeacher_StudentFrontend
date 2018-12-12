@@ -9,7 +9,7 @@ import StudentLandingPage from '../containers/StudentLandingPage/StudentLandingP
 import ClassPicker from '../containers/ClassPicker/ClassPicker'
 import ConfirmClass from '../containers/ConfirmClass/ConfirmClass'
 import PrivateRoute from './PrivateRoute'
-import BookedClasses from '../containers/BookedClasses/BookedClasses';
+import BookedClasses from '../containers/BookedClasses/BookedClasses'
 
 const MainRoutes = ({ history }) => (
   <div>
