@@ -1,25 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import _ from 'lodash'
+import moment from 'moment'
 import * as studentRecordActionCreators from '../../actions/studentRecordActions'
 import * as scheduleActionCreators from '../../actions/scheduleActions'
 
-class StudentLandingPage extends Component {
-  componentWillMount() {
-    const {
-      student,
-      getStudentRecord,
-      studentRecord,
-      getAvailableClasses,
-    } = this.props
-    if (student) {
-      getStudentRecord(student.username)
-    }
-    if (studentRecord) {
-      getAvailableClasses(student.studentLevel)
-    }
+import './BookedClasses.scss'
+import BookedClass from '../../components/BookedClass/BookedClass';
+
+class BookedClasses extends Component {
+  constructor() {
+    super()
+    this.mapClasses = this.mapClasses.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,43 +30,52 @@ class StudentLandingPage extends Component {
     }
   }
 
+  mapClasses() {
+    const {
+      bookedClasses,
+    } = this.props
+    const classesSortedByDate = _.sortBy(bookedClasses,
+      bookedClass => [moment(bookedClass.date, 'DD-MM-YYYY'), -bookedClass.startTime]).reverse()
+    return classesSortedByDate
+      .map(bookedClass => (
+        <BookedClass 
+          key={bookedClass.classId}
+          bookedClass={bookedClass}/>
+      ))
+  }
+
   render() {
-    const { student } = this.props
+    const { bookedClasses } = this.props
     return (
       <div>
+        <h2>Your booked classes</h2>
         {
-            student
-            && (
-            <div>
-              <h1>
-      Welcome
-                {' '}
-                {student.firstName}
-              </h1>
-              <div>
-                <Link to="/student-records">My Teacher</Link>
-                <br />
-                <Link to="/schedule">Choose a class</Link>
-                <br />
-                <Link to="/booked">My classes</Link>
-                <br />
-                <Link to="/class">Start Class</Link>
-              </div>
-            </div>
-            )
+          bookedClasses.length >= 1
+          && (
+          <div className="cardwrapper">
+            {this.mapClasses()}
+          </div>
+          )
 
-          }
+        }
+        {
+          !bookedClasses.length
+          && <div>Loading...</div>
+        }
       </div>
+
     )
   }
 }
 
-StudentLandingPage.defaultProps = {
+BookedClasses.defaultProps = {
+  bookedClasses: null,
   student: null,
   studentRecord: null,
 }
 
-StudentLandingPage.propTypes = {
+BookedClasses.propTypes = {
+  bookedClasses: PropTypes.arrayOf(PropTypes.object),
   getStudentRecord: PropTypes.func.isRequired,
   student: PropTypes.object,
   getAvailableClasses: PropTypes.func.isRequired,
@@ -96,4 +99,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentLandingPage)
+export default connect(mapStateToProps, mapDispatchToProps)(BookedClasses)
