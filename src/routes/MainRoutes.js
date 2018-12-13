@@ -11,7 +11,7 @@ import ConfirmClass from '../containers/ConfirmClass/ConfirmClass'
 import PrivateRoute from './PrivateRoute'
 import BookedClasses from '../containers/BookedClasses/BookedClasses'
 import ClassHistory from '../containers/ClassHistory/ClassHistory'
-import VirtualClassroom from '../../../TeacherFrontend/src/containers/VirtualClassroom/VirtualClassroom';
+import VirtualClassroom from '../../../TeacherFrontend/src/containers/VirtualClassroom/VirtualClassroom'
 
 const MainRoutes = ({ history }) => (
   <div>
