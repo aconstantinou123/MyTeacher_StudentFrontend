@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as studentRecordActionCreators from '../../actions/studentRecordActions'
 import * as scheduleActionCreators from '../../actions/scheduleActions'
+import * as videoChatActionCreators from '../../actions/videoChatActions'
 
 class StudentLandingPage extends Component {
   componentWillMount() {
@@ -14,7 +15,9 @@ class StudentLandingPage extends Component {
       studentRecord,
       getAvailableClasses,
       getClassHistory,
+      generateToken,
     } = this.props
+    generateToken()
     if (student) {
       getStudentRecord(student.username)
       getClassHistory(student.username)
@@ -84,10 +87,12 @@ StudentLandingPage.propTypes = {
   getAvailableClasses: PropTypes.func.isRequired,
   studentRecord: PropTypes.object,
   getClassHistory: PropTypes.func.isRequired,
+  generateToken: PropTypes.func.isRequired,
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    ...videoChatActionCreators,
     ...studentRecordActionCreators,
     ...scheduleActionCreators,
   }, dispatch)
@@ -100,6 +105,7 @@ function mapStateToProps(state) {
     ...state.studentRecord,
     ...state.studentAuthentication,
     ...state.studentSchedule,
+    ...state.videochat,
   }
 }
 
