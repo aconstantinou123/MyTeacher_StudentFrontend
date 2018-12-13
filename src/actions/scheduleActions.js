@@ -5,7 +5,29 @@ import {
   GET_AVAILABLE_CLASSES,
   SELECT_CLASS_TO_BOOK,
   BOOK_CLASS,
+  GET_CLASS_HISTORY,
 } from '../types/types'
+
+export const getClassHistoryPending = () => ({ type: `${GET_CLASS_HISTORY}_PENDING` })
+export const getClassHistoryFulfilled = payload => ({
+  type: `${GET_CLASS_HISTORY}_FULFILLED`,
+  payload,
+})
+export const getClassHistoryRejected = err => ({
+  type: `${GET_CLASS_HISTORY}_REJECTED`,
+  payload: err.message,
+})
+
+export const getClassHistory = username => async (dispatch) => {
+  dispatch(getClassHistoryPending())
+  try {
+    const response = await axios.get(`${process.env.SCHEDULE_URL}/expired-slots/${username}`)
+    const duplicateClassedRemoved = _.uniqBy(response.data, slot => slot.classId)
+    dispatch(getClassHistoryFulfilled(duplicateClassedRemoved))
+  } catch (err) {
+    dispatch(getClassHistoryRejected(err))
+  }
+}
 
 export const selectClassToBook = availableClass => ({
   type: SELECT_CLASS_TO_BOOK,

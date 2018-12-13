@@ -13,9 +13,11 @@ class StudentLandingPage extends Component {
       getStudentRecord,
       studentRecord,
       getAvailableClasses,
+      getClassHistory,
     } = this.props
     if (student) {
       getStudentRecord(student.username)
+      getClassHistory(student.username)
     }
     if (studentRecord) {
       getAvailableClasses(student.studentLevel)
@@ -28,9 +30,11 @@ class StudentLandingPage extends Component {
       getStudentRecord,
       studentRecord,
       getAvailableClasses,
+      getClassHistory,
     } = this.props
     if (student !== nextProps.student && nextProps.student.username) {
       getStudentRecord(nextProps.student.username)
+      getClassHistory(nextProps.student.username)
     } else if (studentRecord !== nextProps.studentRecord && nextProps.studentRecord.studentLevel) {
       getAvailableClasses(nextProps.studentRecord.studentLevel, nextProps.student.username)
     }
@@ -56,6 +60,8 @@ class StudentLandingPage extends Component {
                 <br />
                 <Link to="/booked">My classes</Link>
                 <br />
+                <Link to="/history">My class history</Link>
+                <br />
                 <Link to="/class">Start Class</Link>
               </div>
             </div>
@@ -77,6 +83,7 @@ StudentLandingPage.propTypes = {
   student: PropTypes.object,
   getAvailableClasses: PropTypes.func.isRequired,
   studentRecord: PropTypes.object,
+  getClassHistory: PropTypes.func.isRequired,
 }
 
 function mapDispatchToProps(dispatch) {

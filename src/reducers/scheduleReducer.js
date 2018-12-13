@@ -2,9 +2,14 @@ import {
   GET_AVAILABLE_CLASSES,
   SELECT_CLASS_TO_BOOK,
   BOOK_CLASS,
+  GET_CLASS_HISTORY,
 } from '../types/types'
 
 const defaultState = {
+  classHistoryFetching: false,
+  classHistoryFetched: false,
+  classHistory: [],
+  classHistoryErr: null,
   bookingClass: false,
   bookedClass: false,
   bookingErr: null,
@@ -65,6 +70,26 @@ export default function (state = defaultState, action) {
         bookingClass: false,
         bookedClass: false,
         bookingErr: action.payload,
+      }
+    case `${GET_CLASS_HISTORY}_PENDING`:
+      return {
+        ...state,
+        classHistoryFetching: true,
+      }
+    case `${GET_CLASS_HISTORY}_FULFILLED`:
+      return {
+        ...state,
+        classHistoryFetching: false,
+        classHistoryFetched: true,
+        classHistory: action.payload,
+        classHistoryErr: null,
+      }
+    case `${GET_CLASS_HISTORY}_REJECTED`:
+      return {
+        ...state,
+        classHistoryFetching: false,
+        classHistoryFetched: false,
+        classHistoryErr: action.payload,
       }
     default:
       return state
