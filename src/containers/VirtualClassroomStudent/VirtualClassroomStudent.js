@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import * as videoChatActionCreators from '../../actions/videoChatActions'
 
-import './VirtualClassroom.scss'
+import './VirtualClassroomStudent.scss'
+import WebSocketBoardStudent from '../../components/WebSocketBoardStudent/WebSocketBoardStudent';
 
-class VirtualClassroom extends Component {
+class VirtualClassroomStudent extends Component {
   constructor() {
     super()
     this.handleDisconnect = this.handleDisconnect.bind(this)
@@ -18,8 +19,9 @@ class VirtualClassroom extends Component {
     disconnectFromRoom(activeRoom)
   }
 
+
   render() {
-    const { connectToRoom, hasJoinedRoom } = this.props
+    const { connectToRoom, hasJoinedRoom, dataReceived } = this.props
     return (
       <div className="test">
 Video Chat Test
@@ -33,16 +35,19 @@ Video Chat Test
           hasJoinedRoom
           && <button type="button" onClick={this.handleDisconnect}>Disconnect</button>
         }
+        <WebSocketBoardStudent dataReceived={dataReceived}/>
       </div>
     )
   }
 }
 
-VirtualClassroom.defaultProps = {
+VirtualClassroomStudent.defaultProps = {
   activeRoom: null,
+  dataReceived: null,
 }
 
-VirtualClassroom.propTypes = {
+VirtualClassroomStudent.propTypes = {
+  dataReceived: PropTypes.string,
   activeRoom: PropTypes.object,
   disconnectFromRoom: PropTypes.func.isRequired,
   connectToRoom: PropTypes.func.isRequired,
@@ -52,6 +57,7 @@ VirtualClassroom.propTypes = {
 function mapStateToProps(state) {
   return {
     ...state.videoChat,
+    ...state.webSocket,
   }
 }
 
@@ -61,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VirtualClassroom)
+export default connect(mapStateToProps, mapDispatchToProps)(VirtualClassroomStudent)
