@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import * as videoChatActionCreators from '../../actions/videoChatActions'
 
 import './VirtualClassroomStudent.scss'
-import WebSocketBoardStudent from '../../components/WebSocketBoardStudent/WebSocketBoardStudent';
+import WebSocketBoardStudent from '../../components/WebSocketBoardStudent/WebSocketBoardStudent'
 
 class VirtualClassroomStudent extends Component {
   constructor() {
@@ -35,7 +35,7 @@ Video Chat Test
           hasJoinedRoom
           && <button type="button" onClick={this.handleDisconnect}>Disconnect</button>
         }
-        <WebSocketBoardStudent dataReceived={dataReceived}/>
+        <WebSocketBoardStudent dataReceived={dataReceived} />
       </div>
     )
   }

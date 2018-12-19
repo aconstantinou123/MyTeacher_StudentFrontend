@@ -1,22 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const  WebSocketBoardStudent = ({ dataReceived }) => {
-    return (
-      <div>
-        <p>
-        {dataReceived} 
-        </p>
-      </div>
-    )
-}
+const WebSocketBoardStudent = ({ dataReceived }) => (
+  <div>
+    <p>
+      {dataReceived}
+    </p>
+  </div>
+)
 
 WebSocketBoardStudent.defaultProps = {
-  dataReceived: ''
+  dataReceived: '',
 }
 
 WebSocketBoardStudent.propTypes = {
-  dataReceived: PropTypes.string
+  dataReceived: PropTypes.string,
 }
 
 export default WebSocketBoardStudent
