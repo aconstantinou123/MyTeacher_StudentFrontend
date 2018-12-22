@@ -21,14 +21,14 @@ class VirtualClassroomStudent extends Component {
 
 
   render() {
-    const { 
-      connectToRoom, 
-      hasJoinedRoom, 
+    const {
+      connectToRoom,
+      hasJoinedRoom,
       vocabBoardContent,
       grammarBoardContent,
       miscBoardContent,
       aimsBoardContent,
-     } = this.props
+    } = this.props
     return (
       <div className="test">
 Video Chat Test

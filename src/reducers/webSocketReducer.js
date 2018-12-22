@@ -1,10 +1,10 @@
-import { 
+import {
   MESSAGE_RECEIVED,
   VOCAB_MESSAGE,
   GRAMMAR_MESSAGE,
   AIMS_MESSAGE,
-  MISC_MESSAGE
- } from '../types/types'
+  MISC_MESSAGE,
+} from '../types/types'
 
 const defaultState = {
   dataReceived: '',
