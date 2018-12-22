@@ -3,15 +3,13 @@ import PropTypes from 'prop-types'
 
 import './WebSocketBoardStudent.scss'
 
-const WebSocketBoardStudent = ({ dataReceived }) => {
-  return (
-    <div>
-      <p className="vocab-board">
-        {dataReceived}
-      </p>
-    </div>
-  )
-}
+const WebSocketBoardStudent = ({ dataReceived }) => (
+  <div>
+    <p className="vocab-board">
+      {dataReceived}
+    </p>
+  </div>
+)
 WebSocketBoardStudent.defaultProps = {
   dataReceived: '',
 }
