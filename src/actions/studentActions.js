@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { init } from '../store/websocketsInit'
+import store from '../store/store'
 
 import {
   GET_STUDENT,
@@ -19,6 +21,7 @@ export const getStudent = username => async (dispatch) => {
   try {
     const response = await axios.get(`${process.env.STUDENT_URL}/${username}`)
     dispatch(getStudentFulfilled(response.data))
+    init(store)
   } catch (err) {
     dispatch(getStudentRejected(err))
   }

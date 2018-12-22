@@ -1,14 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const WebSocketBoardStudent = ({ dataReceived }) => (
-  <div>
-    <p>
-      {dataReceived}
-    </p>
-  </div>
-)
+import './WebSocketBoardStudent.scss'
 
+const WebSocketBoardStudent = ({ dataReceived }) => {
+  return (
+    <div>
+      <p className="vocab-board">
+        {dataReceived}
+      </p>
+    </div>
+  )
+}
 WebSocketBoardStudent.defaultProps = {
   dataReceived: '',
 }

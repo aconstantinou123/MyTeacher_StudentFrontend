@@ -13,8 +13,6 @@ const history = createHistory()
 
 let prevLocation = {}
 
-console.log('student')
-
 history.listen((location) => {
   const pathChanged = prevLocation.pathname !== location.pathname
   const hashChanged = prevLocation.hash !== location.hash

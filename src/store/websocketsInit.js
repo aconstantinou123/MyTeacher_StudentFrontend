@@ -3,38 +3,40 @@ import { Stomp } from '@stomp/stompjs'
 import SockJS from 'sockjs-client'
 import { MESSAGE_RECEIVED } from '../types/types'
 
-const socket = new SockJS('http://localhost:3005/ws')
-const stompClient = Stomp.over(socket)
-stompClient.maxWebSocketFrameSize = 64 * 1024
+let socket
+let stompClient
 
 const init = (store) => {
+  socket = new SockJS('http://localhost:3005/ws')
+  stompClient = Stomp.over(socket)
   const onConnected = () => {
-    stompClient.subscribe('/topic/public', (message) => {
+    const { teacherId, username } = store.getState().student.student
+    stompClient.subscribe(`/topic/public/${teacherId}`, (message) => {
       const parsedMessage = JSON.parse(message.body)
       store.dispatch({ type: MESSAGE_RECEIVED, payload: parsedMessage.content })
     })
-    stompClient.send('/app/chat.addUser',
-      {},
-      JSON.stringify({ sender: 'Alex', type: 'JOIN' }))
+    stompClient.send(`/app/chat.addUser/${teacherId}`,
+    {},
+    JSON.stringify({ sender: username, type: 'JOIN' }))
   }
 
-  const onError = (error) => {
+
+
+const onError = (error) => {
     console.log('disconnect', error.message)
     stompClient.connect({}, onConnected, onError)
   }
-
-
-  stompClient.connect({}, onConnected, onError)
+      stompClient.connect({}, onConnected, onError)
 }
 
-const emit = (message) => {
+const emit = (message, username, teacherId) => {
   if (message && stompClient) {
     const chatMessage = {
-      sender: 'Alex',
+      sender: username,
       content: message,
       type: 'CHAT',
     }
-    stompClient.send('/app/chat.sendMessage', {}, JSON.stringify(chatMessage))
+    stompClient.send(`/app/chat.sendMessage/${teacherId}`, {}, JSON.stringify(chatMessage))
   }
 }
 
