@@ -15,9 +15,7 @@ class StudentLandingPage extends Component {
       studentRecord,
       getAvailableClasses,
       getClassHistory,
-      generateToken,
     } = this.props
-    generateToken()
     if (student) {
       getStudentRecord(student.username)
       getClassHistory(student.username)
@@ -87,7 +85,6 @@ StudentLandingPage.propTypes = {
   getAvailableClasses: PropTypes.func.isRequired,
   studentRecord: PropTypes.object,
   getClassHistory: PropTypes.func.isRequired,
-  generateToken: PropTypes.func.isRequired,
 }
 
 function mapDispatchToProps(dispatch) {

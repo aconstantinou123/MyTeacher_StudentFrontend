@@ -1,12 +1,12 @@
-export const attachTracks = (tracks, remoteContainer) => {
+export const attachTracks = (tracks, studentContainer) => {
   tracks.forEach((track) => {
-    remoteContainer.appendChild(track.attach())
+    studentContainer.appendChild(track.attach())
   })
 }
 
-export const attachParticipantTracks = (participant, remoteContainer) => {
+export const attachParticipantTracks = (participant, studentContainer) => {
   const tracks = Array.from(participant.tracks.values())
-  attachTracks(tracks, remoteContainer)
+  attachTracks(tracks, studentContainer)
 }
 
 export const detachTracks = (tracks) => {
@@ -22,18 +22,29 @@ export const detachParticipantTracks = (participant) => {
   detachTracks(tracks)
 }
 
-export const roomJoined = (room, remoteContainer, localContainer) => {
-  attachParticipantTracks(room.localParticipant, localContainer)
+export const roomJoined = (room, studentContainer, teacherContainer) => {
+  attachParticipantTracks(room.localParticipant, studentContainer)
+  console.log(room.participants)
   room.participants.forEach((participant) => {
     console.log(`Already in Room: '${participant.identity}'`)
-    attachParticipantTracks(participant, remoteContainer)
+    if(participant.identity.includes('TEACHER')){
+      attachParticipantTracks(participant, teacherContainer)
+    }
+    else {
+      attachParticipantTracks(participant, studentContainer)
+    }
   })
   room.on('participantConnected', (participant) => {
     console.log(`A remote Participant connected: ${participant}`)
   })
   room.on('trackSubscribed', (track, participant) => {
     console.log(`${participant.identity} added track: ${track.kind}`)
-    attachTracks([track], remoteContainer)
+    if(participant.identity.includes('TEACHER')){
+      attachTracks([track], teacherContainer)
+    }
+    else {
+      attachTracks([track], studentContainer)
+    }
   })
 
   room.on('trackUnsubscribed', (track, participant) => {

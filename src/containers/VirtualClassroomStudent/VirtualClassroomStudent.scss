@@ -1,0 +1,45 @@
+.classroom-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 55% 45%;
+
+  .teacher-container{
+    video{
+      position: absolute;
+      z-index: -1;
+      width: 50vw;
+    }
+  }
+
+  .board-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    border: solid black 1px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .student-container{
+    background: aliceblue;
+
+    .student-video{
+      display: grid;
+      grid-gap: 5px;
+      grid-template-columns: 33% 33% 33%;
+      grid-template-rows: 50% 50%;
+      video{
+        width: 100%;
+      }
+    }
+  }
+}
+

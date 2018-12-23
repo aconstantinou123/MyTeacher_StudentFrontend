@@ -4,13 +4,33 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import * as videoChatActionCreators from '../../actions/videoChatActions'
 
-import './VirtualClassroomStudent.scss'
 import WebSocketBoardStudent from '../../components/WebSocketBoardStudent/WebSocketBoardStudent'
+import './VirtualClassroomStudent.scss'
 
 class VirtualClassroomStudent extends Component {
   constructor() {
     super()
     this.handleDisconnect = this.handleDisconnect.bind(this)
+  }
+
+  componentDidMount(){
+    const {
+      student,
+      generateToken,
+    } = this.props
+    if(student){
+      generateToken(student.username)
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {
+      student,
+      generateToken,
+    } = this.props
+    if (student !== nextProps.student && nextProps.student.username) {
+      generateToken(nextProps.student.username)
+    }
   }
 
   handleDisconnect() {
@@ -30,28 +50,32 @@ class VirtualClassroomStudent extends Component {
       aimsBoardContent,
     } = this.props
     return (
-      <div className="test">
-Video Chat Test
-        <div ref={(remoteMedia) => { this.remoteMedia = remoteMedia }} className="media-container" />
-        <div ref={(localMedia) => { this.localMedia = localMedia }} className="media-container" />
-        {
-          !hasJoinedRoom
-          && <button type="button" onClick={() => connectToRoom(this.localMedia, this.remoteMedia)}>Connect</button>
-        }
-        {
-          hasJoinedRoom
-          && <button type="button" onClick={this.handleDisconnect}>Disconnect</button>
-        }
-        <WebSocketBoardStudent dataReceived={vocabBoardContent} />
-        <WebSocketBoardStudent dataReceived={grammarBoardContent} />
-        <WebSocketBoardStudent dataReceived={aimsBoardContent} />
-        <WebSocketBoardStudent dataReceived={miscBoardContent} />
+      <div className="classroom-container">
+          <div ref={(teacherMedia) => { this.teacherMedia = teacherMedia }} className="teacher-container"/>
+        <div className="board-container">
+          <WebSocketBoardStudent dataReceived={vocabBoardContent} />
+          <WebSocketBoardStudent dataReceived={grammarBoardContent} />
+          <WebSocketBoardStudent dataReceived={aimsBoardContent} />
+          <WebSocketBoardStudent dataReceived={miscBoardContent} />
+        </div>
+        <div className="student-container">
+          < div ref={(studentMedia) => { this.studentMedia = studentMedia }} className="student-video"/>
+        </div>
+          {
+            !hasJoinedRoom
+            && <button type="button" onClick={() => connectToRoom(this.studentMedia, this.teacherMedia)}>Connect</button>
+          }
+          {
+            hasJoinedRoom
+            && <button type="button" onClick={this.handleDisconnect}>Disconnect</button>
+          }
       </div>
     )
   }
 }
 
 VirtualClassroomStudent.defaultProps = {
+  student: null,
   activeRoom: null,
   vocabBoardContent: null,
   grammarBoardContent: null,
@@ -60,6 +84,8 @@ VirtualClassroomStudent.defaultProps = {
 }
 
 VirtualClassroomStudent.propTypes = {
+  student: PropTypes.object,
+  generateToken: PropTypes.func.isRequired,
   vocabBoardContent: PropTypes.string,
   grammarBoardContent: PropTypes.string,
   aimsBoardContent: PropTypes.string,
@@ -74,6 +100,7 @@ function mapStateToProps(state) {
   return {
     ...state.videoChat,
     ...state.webSocket,
+    ...state.student,
   }
 }
 

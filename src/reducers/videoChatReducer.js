@@ -19,6 +19,7 @@ const defaultState = {
   activeRoom: null,
   localParticipant: null,
   connectionError: null,
+  participants: null,
 }
 
 export default function (state = defaultState, action) {
@@ -26,6 +27,7 @@ export default function (state = defaultState, action) {
     case DISCONNECT_FROM_ROOM:
       return {
         ...state,
+        participants: null,
         connectingToRoom: false,
         connectedToRoom: false,
         roomName: '',
@@ -40,6 +42,7 @@ export default function (state = defaultState, action) {
     case `${CONNECT_TO_ROOM}_FULFILLED`:
       return {
         ...state,
+        participants: action.payload.participants,
         connectingToRoom: false,
         connectedToRoom: true,
         roomName: action.payload.name,
@@ -47,7 +50,10 @@ export default function (state = defaultState, action) {
         localMediaAvailable: true,
         hasJoinedRoom: true,
         activeRoom: action.payload,
-        localParticipant: action.payload.localParticipant,
+        localParticipant: {
+          ...action.payload.localParticipant,
+          role: 'user',
+        },
         connectionError: null,
       }
     case `${CONNECT_TO_ROOM}_REJECTED`:
@@ -63,6 +69,7 @@ export default function (state = defaultState, action) {
         activeRoom: null,
         localParticipant: null,
         connectionError: action.payload,
+        participants: null
       }
     case `${GENERATE_TOKEN}_PENDING`:
       return { ...state, videoTokenFetching: true }
