@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { connect, createLocalTracks } from 'twilio-video'
-import { roomJoined } from '../helperFunctions/videoChatFunctions'
 import randomstring from 'randomstring'
+import { roomJoined } from '../helperFunctions/videoChatFunctions'
 
 import {
   GENERATE_TOKEN,

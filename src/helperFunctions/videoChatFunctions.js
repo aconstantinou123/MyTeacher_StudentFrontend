@@ -27,10 +27,9 @@ export const roomJoined = (room, studentContainer, teacherContainer) => {
   console.log(room.participants)
   room.participants.forEach((participant) => {
     console.log(`Already in Room: '${participant.identity}'`)
-    if(participant.identity.includes('TEACHER')){
+    if (participant.identity.includes('TEACHER')) {
       attachParticipantTracks(participant, teacherContainer)
-    }
-    else {
+    } else {
       attachParticipantTracks(participant, studentContainer)
     }
   })
@@ -39,10 +38,9 @@ export const roomJoined = (room, studentContainer, teacherContainer) => {
   })
   room.on('trackSubscribed', (track, participant) => {
     console.log(`${participant.identity} added track: ${track.kind}`)
-    if(participant.identity.includes('TEACHER')){
+    if (participant.identity.includes('TEACHER')) {
       attachTracks([track], teacherContainer)
-    }
-    else {
+    } else {
       attachTracks([track], studentContainer)
     }
   })

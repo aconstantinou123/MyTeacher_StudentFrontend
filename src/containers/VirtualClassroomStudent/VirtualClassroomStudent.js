@@ -13,17 +13,17 @@ class VirtualClassroomStudent extends Component {
     this.handleDisconnect = this.handleDisconnect.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const {
       student,
       generateToken,
     } = this.props
-    if(student){
+    if (student) {
       generateToken(student.username)
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     const {
       student,
       generateToken,
@@ -51,7 +51,7 @@ class VirtualClassroomStudent extends Component {
     } = this.props
     return (
       <div className="classroom-container">
-          <div ref={(teacherMedia) => { this.teacherMedia = teacherMedia }} className="teacher-container"/>
+        <div ref={(teacherMedia) => { this.teacherMedia = teacherMedia }} className="teacher-container" />
         <div className="board-container">
           <WebSocketBoardStudent dataReceived={vocabBoardContent} />
           <WebSocketBoardStudent dataReceived={grammarBoardContent} />
@@ -59,13 +59,13 @@ class VirtualClassroomStudent extends Component {
           <WebSocketBoardStudent dataReceived={miscBoardContent} />
         </div>
         <div className="student-container">
-          < div ref={(studentMedia) => { this.studentMedia = studentMedia }} className="student-video"/>
+          <div ref={(studentMedia) => { this.studentMedia = studentMedia }} className="student-video" />
         </div>
-          {
+        {
             !hasJoinedRoom
             && <button type="button" onClick={() => connectToRoom(this.studentMedia, this.teacherMedia)}>Connect</button>
           }
-          {
+        {
             hasJoinedRoom
             && <button type="button" onClick={this.handleDisconnect}>Disconnect</button>
           }

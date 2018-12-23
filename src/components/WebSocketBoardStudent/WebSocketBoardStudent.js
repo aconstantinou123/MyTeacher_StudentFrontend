@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './WebSocketBoardStudent.scss'
 
 const WebSocketBoardStudent = ({ dataReceived }) => (
-  <div className='board'>
+  <div className="board">
     <p className="board-paragraph">
       {dataReceived}
     </p>

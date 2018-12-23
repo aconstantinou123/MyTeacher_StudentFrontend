@@ -69,7 +69,7 @@ export default function (state = defaultState, action) {
         activeRoom: null,
         localParticipant: null,
         connectionError: action.payload,
-        participants: null
+        participants: null,
       }
     case `${GENERATE_TOKEN}_PENDING`:
       return { ...state, videoTokenFetching: true }
