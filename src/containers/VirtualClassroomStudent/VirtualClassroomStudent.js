@@ -11,6 +11,7 @@ class VirtualClassroomStudent extends Component {
   constructor() {
     super()
     this.handleDisconnect = this.handleDisconnect.bind(this)
+    this.studentWebCamCSS = this.studentWebCamCSS.bind(this)
   }
 
   componentDidMount() {
@@ -30,6 +31,25 @@ class VirtualClassroomStudent extends Component {
     } = this.props
     if (student !== nextProps.student && nextProps.student.username) {
       generateToken(nextProps.student.username)
+    }
+  }
+
+  studentWebCamCSS(){
+    const { numberOfParticipants } = this.props
+    switch(numberOfParticipants){
+      case 1:
+        return 'student-video one'
+      case 2:
+        return 'student-video two'
+      case 3:
+        return 'student-video three'
+      case 4:
+        return 'student-video four'
+      case 5:
+      case 6:
+        return 'student-video six'
+      default:
+        return 'student-video one'
     }
   }
 
@@ -94,6 +114,7 @@ VirtualClassroomStudent.propTypes = {
   disconnectFromRoom: PropTypes.func.isRequired,
   connectToRoom: PropTypes.func.isRequired,
   hasJoinedRoom: PropTypes.bool.isRequired,
+  numberOfParticipants: PropTypes.number.isRequired,
 }
 
 function mapStateToProps(state) {

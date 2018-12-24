@@ -47,7 +47,7 @@ export const connectToRoom = (studentContainer, teacherContainer) => async (disp
   try {
     const localTracks = await createLocalTracks({
       audio: true,
-      video: { width: 320 },
+      video: { width: 640 },
     })
     const room = await connect(videoToken, { name: 'example', tracks: localTracks })
     console.log(`Successfully joined a Room: ${room}`)
