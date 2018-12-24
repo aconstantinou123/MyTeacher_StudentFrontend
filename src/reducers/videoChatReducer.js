@@ -22,7 +22,7 @@ const defaultState = {
   localParticipant: null,
   connectionError: null,
   participants: null,
-  numberOfParticipants: 1
+  numberOfParticipants: 1,
 }
 
 export default function (state = defaultState, action) {
@@ -30,12 +30,12 @@ export default function (state = defaultState, action) {
     case PARTICIPANT_ADDED:
       return {
         ...state,
-        numberOfParticipants: state.numberOfParticipants + 1
+        numberOfParticipants: state.numberOfParticipants + 1,
       }
     case PARTICIPANT_LEFT:
       return {
         ...state,
-        numberOfParticipants: state.numberOfParticipants - 1
+        numberOfParticipants: state.numberOfParticipants - 1,
       }
     case DISCONNECT_FROM_ROOM:
       return {

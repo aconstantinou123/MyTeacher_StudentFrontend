@@ -34,9 +34,9 @@ class VirtualClassroomStudent extends Component {
     }
   }
 
-  studentWebCamCSS(){
+  studentWebCamCSS() {
     const { numberOfParticipants } = this.props
-    switch(numberOfParticipants){
+    switch (numberOfParticipants) {
       case 1:
         return 'student-video one'
       case 2:

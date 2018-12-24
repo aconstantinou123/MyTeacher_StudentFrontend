@@ -38,7 +38,7 @@ export const roomJoined = (room, studentContainer, teacherContainer) => {
       attachParticipantTracks(participant, teacherContainer)
     } else {
       attachParticipantTracks(participant, studentContainer)
-      console.log('herer')      
+      console.log('herer')
       store.dispatch({ type: PARTICIPANT_ADDED })
     }
   })
